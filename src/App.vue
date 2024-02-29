@@ -9,6 +9,6 @@
   }
 </script>
 <template>
-  <QuillEditor toolbar="minimal" />
+  <QuillEditor toolbar="full" />
 </template>
 
