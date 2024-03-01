@@ -12,3 +12,4 @@
   <QuillEditor toolbar="full" />
 </template>
 
+
