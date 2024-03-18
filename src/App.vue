@@ -1,9 +1,5 @@
-
-<script>
-
-</script>
-
 <template>
+
   <nav>
 <router-link to="/"> Home </router-link> |
 <router-link to="/feed"> Feed </router-link> |
@@ -11,27 +7,17 @@
 <router-link to="/sign-in"> Login </router-link> |
 </nav>
   <router-view />
+  <QuillEditor toolbar="full" />
 </template>
+<script>
+  import { QuillEditor } from '@vueup/vue-quill'
+  import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  export default {
+    components: {
+      QuillEditor
+    }
+  }
+</script>
 
-nav {
-  padding: 30px;
-}
 
-nav a {
-  font-weight: bold;
-  color: #000;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
