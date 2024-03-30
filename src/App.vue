@@ -1,14 +1,28 @@
 <script setup>
-  import { QuillEditor } from '@vueup/vue-quill'
-  import '@vueup/vue-quill/dist/vue-quill.snow.css';
-  import './assets/toolbar.css'; 
-  import downloadBtn from './components/downloadBtn.vue';
+// imports -------------------------------------------------------------------------------------------
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import './assets/toolbar.css';
+
+import downloadFile from './components/downloadFile.vue';
+import { ref } from "vue";
+
+
+// text editor content -------------------------------------------------------------------------------
+const quillContent = ref("")
 
 </script>
 
 <template>
-  <QuillEditor toolbar="full" />
-  <downloadBtn />
+
+  <!-- Download button and file name input field --------------------------------------------------- -->
+  <div class="navBar">
+    <downloadFile :quill-content="quillContent" />
+  </div>
+
+  <!-- Quill Text Editor --------------------------------------------------------------------------- -->
+  <QuillEditor v-model:content="quillContent" toolbar="full" ref="quill" content-type="html" />
+
 </template>
 
 
@@ -26,5 +40,10 @@ nav a.router-link-exact-active {
   color: #42b9b5;
 }
 
+.navBar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
 </style>
-
