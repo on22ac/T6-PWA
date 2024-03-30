@@ -21,7 +21,7 @@ const quillContent = ref("")
   </div>
 
   <!-- Quill Text Editor --------------------------------------------------------------------------- -->
-  <QuillEditor v-model:content="quillContent" toolbar="full" ref="quill" content-type="html" />
+  <QuillEditor class="ql-editor" v-model:content="quillContent" toolbar="full" ref="quill" content-type="html" />
 
 </template>
 
