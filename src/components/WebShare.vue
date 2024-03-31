@@ -12,7 +12,7 @@ const startShare = async () => {
     // Access to Quell-Editor
     const quillEditor = document.querySelector('.ql-editor');
     if (!quillEditor) {
-      console.error('Quill-Editor nicht gefunden!');
+      console.error('Quill-Editor not found!');
       return;
     }
 
@@ -25,7 +25,7 @@ const startShare = async () => {
     // Call Share
     share();
   } catch (err) {
-    alert('Ocorreu um erro inesperado, tente novamente mais tarde.');
+    alert('It was an undisputed mistake.');
     console.error(err);
   }
 };
@@ -34,3 +34,4 @@ const startShare = async () => {
 <template>
   <button v-if="isShareSupported" @click="startShare">Compartilhar</button>
 </template>
+
