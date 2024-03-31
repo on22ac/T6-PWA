@@ -1,9 +1,9 @@
 <template>
   <div>
-    <!-- Hier wird der Quill-Editor geladen -->
+    <!-- The Quill editor is loaded here -->
     <QuillEditor v-model="editorContent" toolbar="full" />
 
-    <!-- Button zum Teilen des Inhalts des Quell-Editors -->
+    <!-- Button for sharing the contents of Quell-Editor -->
     <button @click="shareContent">Text teilen</button>
   </div>
 </template>
@@ -18,25 +18,25 @@ export default {
   },
   data() {
     return {
-      editorContent: '', // Hier wird der Inhalt des Editors gespeichert
+      editorContent: '', // The content of the editor is stored here
     };
   },
   methods: {
     shareContent() {
-      // Den Quill-Editor finden
+      // Find the Quill-Editor
       const quillEditor = document.querySelector('.ql-editor');
 
-      // Überprüfen, ob der Quill-Editor gefunden wurde
+      // Verify that the Quill editor was found
       if (quillEditor) {
-        // Den Inhalt des Quill-Editors abrufen
+        // Get the contents of the Quill editor
         const editorContent = quillEditor.innerHTML;
 
-        // Text zum Teilen erstellen
+        // Create text to share
         const shareData = {
           text: editorContent.trim()
         };
 
-        // Versuchen, den Text zu teilen
+        // Try to share the content
         try {
           navigator.share(shareData);
           console.log('Inhalt erfolgreich geteilt!');
@@ -44,7 +44,7 @@ export default {
           console.error('Fehler beim Teilen:', err);
         }
       } else {
-        // Fehlerbehandlung, wenn der Quill-Editor nicht gefunden wurde
+        // Error handling when the Quill editor was not found
         console.error('Quill-Editor nicht gefunden!');
       }
     }

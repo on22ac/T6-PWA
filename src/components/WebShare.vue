@@ -3,26 +3,26 @@ import { useShare } from '@vueuse/core';
 import { ref } from 'vue';
 
 const shareObj = ref({
-  text: '', // Hier wird der Text für das Teilen gespeichert
+  text: '', // This is where the text is saved for sharing
 });
 const { share, isSupported: isShareSupported } = useShare(shareObj);
 
 const startShare = async () => {
   try {
-    // Zugriff auf den Quell-Editor
+    // Access to Quell-Editor
     const quillEditor = document.querySelector('.ql-editor');
     if (!quillEditor) {
       console.error('Quill-Editor nicht gefunden!');
       return;
     }
 
-    // Den Inhalt des Quell-Editors abrufen
+    // Get the contents of the  Quell-Editors 
     const editorContent = quillEditor.innerHTML;
 
-    // Text in das shareObj einfügen
+    // Insert text into the shareObj
     shareObj.value.text = editorContent;
 
-    // Teilen aufrufen
+    // Call Share
     share();
   } catch (err) {
     alert('Ocorreu um erro inesperado, tente novamente mais tarde.');
