@@ -55,7 +55,7 @@ export default {
 <style scoped>
 /* Button styles */
 .share-button {
-  background-color: #2b672d; /* Dark green background */
+  background-color: #4CAF50; /* Dark green background */
   color: white; /* White text color */
   padding: 10px 20px; /* Padding */
   border: none; /* No border */
@@ -67,7 +67,7 @@ export default {
 
 /* Hover effect */
 .share-button:hover {
-  background-color: #9fdba1; /* Lighter green background on hover */
+  background-color: #2E7D32; /* Lighter green background on hover */
   color: black; /* Black text color on hover */
 }
 </style>
