@@ -9,18 +9,18 @@ const { share, isSupported: isShareSupported } = useShare(shareObj);
 
 const startShare = async () => {
   try {
-    // Access to Quell-Editor
+    // Access to Quill-Editor
     const quillEditor = document.querySelector('.ql-editor');
     if (!quillEditor) {
       console.error('Quill-Editor not found!');
       return;
     }
 
-    // Get the contents of the  Quell-Editors 
-    const editorContent = quillEditor.innerHTML;
+    // Get the text content of the Quill-Editor
+    const plainTextContent = quillEditor.innerText;
 
-    // Insert text into the shareObj
-    shareObj.value.text = editorContent;
+    // Insert plain text into the shareObj
+    shareObj.value.text = plainTextContent.trim();
 
     // Call Share
     share();
@@ -29,6 +29,7 @@ const startShare = async () => {
     console.error(err);
   }
 };
+
 </script>
 
 <template>
