@@ -28,8 +28,8 @@ export default {
 
       // Verify that the Quill editor was found
       if (quillEditor) {
-        // Get the contents of the Quill editor
-        const editorContent = quillEditor.innerHTML;
+        // Get the text content of the Quill editor (without HTML tags)
+        const editorContent = quillEditor.innerText;
 
         // Create text to share
         const shareData = {
