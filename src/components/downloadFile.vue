@@ -80,9 +80,7 @@ const downloadFile = () => {
     enableLinks: true
   };
 
-
   // generate pdf and download ------------------------------------
-  // html2pdf().from(pdfContent).set(options).save();
   html2pdf().from(editorHTML).set(options).save();
 
 };
@@ -93,7 +91,6 @@ const getEditorHTML = () => {
   const quillEditor = document.querySelector('.ql-editor');
   return quillEditor.innerHTML;
 };
-
 
 </script>
 
@@ -155,4 +152,5 @@ pre {
   word-wrap: break-word;
   page-break-inside: auto;
 }
+
 </style>
