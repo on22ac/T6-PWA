@@ -1,17 +1,21 @@
 <script setup>
-// imports -------------------------------------------------------------------------------------------
+// imports --------------------------------------------------------------------------------------------
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import './assets/toolbar.css';
-
-import downloadFile from './components/downloadFile.vue';
 import { ref } from "vue";
 
+// css import
+import './assets/style.css';
 
-// text editor content -------------------------------------------------------------------------------
+// download module import
+import downloadFile from './components/downloadFile.vue';
+
+// text editor content --------------------------------------------------------------------------------
 const quillContent = ref("")
 
 </script>
+
 
 <template>
 
