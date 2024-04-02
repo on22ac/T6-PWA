@@ -12,12 +12,9 @@
 <script>
   import { QuillEditor } from '@vueup/vue-quill'
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
+  import './assets/toolbar.css'; 
+  import downloadBtn from './components/downloadBtn.vue';
 
-  export default {
-    components: {
-      QuillEditor
-    }
-  };
 </script>
 
 
@@ -32,7 +29,8 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #42b9b5;
 }
+
 </style>
 
