@@ -31,6 +31,9 @@ import { defineProps } from "vue";
 import { ref } from 'vue';
 import html2pdf from 'html2pdf.js';
 
+// css import
+import '../assets/style.css';
+
 // set ref for file name -----------------------------------------
 const fileName = ref('');
 
@@ -45,30 +48,6 @@ const downloadFile = () => {
   const editorHTML = getEditorHTML();
 
   console.log(editorHTML);
-
-  // pdf ----------------------------------------------------------
-  /* const pdfContent = `
-       <html>
-         <head>
-           <title>${fileNameValue}</title>
-           <style>
-           pre {
-            font-family: inherit;
-          font-weight: inherit;
-          font-style: inherit;
-          font-display: inherit;
-          color: inherit;
-          font-size: 12px;
-          word-wrap: break-word;
-          page-break-inside: auto;
-          }
-           </style>
-         </head>
-         <body>
-           <pre>${props.quillContent}</pre>
-       </body>
-       </html>
-     `; */
 
   // set pdf form options ------------------------------------------
   const options = {
@@ -93,64 +72,3 @@ const getEditorHTML = () => {
 };
 
 </script>
-
-
-<style scoped>
-button {
-  padding: 7px 12px;
-  background-color: #218087;
-  color: #fff;
-  font-size: small;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
-}
-
-button:hover {
-  background-color: #376782;
-}
-
-.filename {
-  padding: 7px 12px;
-  font-size: small;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  border-style: solid;
-  border-color: #2c9aa1;
-  align-self: flex-end;
-  min-width: 176.8px ;
-}
-
-.navBar {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0 5px 0;
-}
-
-.pdfContentContainer {
-  width: 100%;
-}
-
-.left {
-  align-self: flex-start;
-}
-
-.right {
-  align-self: flex-end;
-}
-
-pre {
-  font-family: inherit;
-  font-weight: inherit;
-  font-style: inherit;
-  font-display: inherit;
-  color: inherit;
-  font-size: 12px;
-  word-wrap: break-word;
-  page-break-inside: auto;
-}
-
-</style>
