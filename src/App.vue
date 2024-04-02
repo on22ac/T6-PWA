@@ -46,4 +46,9 @@ nav a.router-link-exact-active {
   justify-content: space-between;
   margin-bottom: 5px;
 }
+
+.ql-editor {
+  position: sticky;
+}
+
 </style>
