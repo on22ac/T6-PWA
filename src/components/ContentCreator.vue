@@ -6,12 +6,12 @@
       toolbar="full"
       :options="options"
       ref="quillEditor"
-      @editor-change="autoSave"
+      
     />
-    
-    <!-- <div class="action-row">
+    <!-- @editor-change="autoSave" -->
+    <div class="action-row">
       <button @click="save">Save</button>
-    </div> -->
+    </div>
     <!-- <h1> {{ content }} </h1> -->
   </div>
 </template>
@@ -48,7 +48,7 @@ onMounted(() => {
   // } catch (error) {
   //   console.error('Error retrieving content:', error);
   // }
-  const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+  onSnapshot(docRef, (docSnapshot) => {
     if (docSnapshot.exists()) {
       // Get the HTML content from the Firestore document
       const htmlContent = docSnapshot.data().content;
@@ -59,11 +59,26 @@ onMounted(() => {
     }
   });
 
-  // Unsubscribe from real-time updates when component is unmounted
-  return () => unsubscribe();
+  // // Unsubscribe from real-time updates when component is unmounted
+  // return () => unsubscribe();
 });
 
-const autoSave = async () => {
+// const autoSave = async () => {
+//   try {
+//     // Get the HTML content of the Quill editor using document.querySelector
+//     const htmlContent = document.querySelector(".ql-editor").innerHTML;
+
+//     // Save the HTML content to Firestore
+//     await setDoc(docRef, { content: htmlContent });
+
+//     console.log('Content saved successfully to Firestore!');
+//   } catch (error) {
+//     console.error('Error saving content:', error);
+//   }
+// };
+
+
+const save = async () => {
   try {
     // Get the HTML content of the Quill editor using document.querySelector
     const htmlContent = document.querySelector(".ql-editor").innerHTML;
@@ -76,6 +91,7 @@ const autoSave = async () => {
     console.error('Error saving content:', error);
   }
 };
+
 // const save = async () => {
 //   // Trigger auto-save function to save the content
 //   await autoSave();
