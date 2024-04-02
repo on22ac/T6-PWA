@@ -17,7 +17,7 @@
     components: {
       QuillEditor
     }
-  }
+  };
 </script>
 
 
