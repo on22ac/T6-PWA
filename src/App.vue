@@ -1,6 +1,8 @@
 <script>
-  import { QuillEditor } from '@vueup/vue-quill'
+  import { QuillEditor, onMounted } from '@vueup/vue-quill'
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
+  import { collection, query, where, getDocs } from 'firebase/firestore';
+  import { db } from '@/firebase'
 
   export default {
     components: {
@@ -8,19 +10,26 @@
     }
   }
 </script>
+
 <template>
   <QuillEditor toolbar="full" />
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+onMounted(async () => {
+  const querySnapshot = await getDocs(collection(db,'notes'));
+  let fbnotes = []
+querySnapshot.forEach((doc) => {
+  console.log(doc.id, " => ", doc.data());
+  const notes = {
+    id: doc.id,
+    content: doc.data().content,
+  }
+  fbnotes.push(notes)
+});
+QuillEditor.value = fbnotes
+})
 
+<style>
 nav {
   padding: 30px;
 }
@@ -34,3 +43,4 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+

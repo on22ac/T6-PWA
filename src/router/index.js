@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { getFirestore } from "firebase/firestore";
 
 const routes = [
   {
@@ -23,3 +24,10 @@ const router = createRouter({
 })
 
 export default router
+
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app);
+
+export {
+  db
+}
