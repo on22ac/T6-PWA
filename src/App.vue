@@ -40,15 +40,4 @@ nav a.router-link-exact-active {
   color: #42b9b5;
 }
 
-.navBar {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-.ql-editor {
-  position: sticky;
-}
-
 </style>
