@@ -1,31 +1,46 @@
 <template>
-    <button @click="logOut">Log Out</button>
+    <!-- <navBar />
+    <Editor :content="content"/> -->
+    <downloadFile />
     <div class="wrapper">
       <QuillEditor
-        v-model:content="content"
-        contentType="html"
-        toolbar="full"
-        :options="options"
-        ref="quillEditor"
-        
+      class="ql-editor"
+      v-model:content="content"
+      contentType="html"
+      toolbar="full"
+      :options="options"
+      ref="quillEditor"
+      
       />
-      <!-- @editor-change="autoSave" -->
-      <div class="action-row">
-        <button @click="save">Save</button>
-      </div>
-      <!-- <h1> {{ content }} </h1> -->
     </div>
+   
+
+      <!-- <h1> {{ content }} </h1> -->
+    
+    <Share/>
+    <Sync />
   </template>
   
   <script setup>
+  // css import
+  import '../assets/style.css';
+  import '../assets/toolbar.css';
+
+
+
+  import Sync from '../components/Sync.vue'
+  import downloadFile from '../components/downloadFile.vue';
+  import Share from '../components/Share.vue'
+
   import { ref, onMounted } from 'vue';
   import { QuillEditor } from '@vueup/vue-quill';
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
-  import { db } from '../firebase/firebase.js'; // Import your Firebase configuration
-  import { doc, setDoc, onSnapshot } from 'firebase/firestore'; // Import Firestore modularly
-  import { useRouter } from 'vue-router'
-  const router = useRouter()
+
+  // import { db } from '../firebase/firebase.js'; // Import your Firebase configuration
+  // import { doc, onSnapshot } from 'firebase/firestore'; // Import Firestore modularly
+
   
+
   const content = ref('');
   const options = {
     debug: 'info',
@@ -34,15 +49,12 @@
     theme: 'snow'
   };
 
-  const logOut = () => {
-  router.push('/')
-}
-  
   const quillEditor = ref(null);
-  
-  const docRef = doc(db, 'notes', 'data');
-  
-  onMounted(() => {
+
+  // const docRef = doc(db, 'notes', 'data');
+
+
+  // onMounted(() => {
     // try {
     //   const docSnap = await getDoc(docRef);
     //   if (docSnap.exists()) {
@@ -56,43 +68,104 @@
     // } catch (error) {
     //   console.error('Error retrieving content:', error);
     // }
-    onSnapshot(docRef, (docSnapshot) => {
-      if (docSnapshot.exists()) {
-        // Get the HTML content from the Firestore document
-        const htmlContent = docSnapshot.data().content;
-        // Set the retrieved content to the 'content' variable
-        content.value = htmlContent;
-      } else {
-        console.log("No such document!");
-      }
-    });
+    // onSnapshot(docRef, (docSnapshot) => {
+    //   if (docSnapshot.exists()) {
+    //     // Get the HTML content from the Firestore document
+    //     const htmlContent = docSnapshot.data().content;
+    //     // Set the retrieved content to the 'content' variable
+    //     content.value = htmlContent;
+    //   } else {
+    //     console.log("No such document!");
+    //   }
+    // });
+
+
   
     // // Unsubscribe from real-time updates when component is unmounted
     // return () => unsubscribe();
-  });
+  // });
+
   
-  const save = async () => {
-    try {
-      // Get the HTML content of the Quill editor using document.querySelector
-      const htmlContent = document.querySelector(".ql-editor").innerHTML;
   
-      // Save the HTML content to Firestore
-      await setDoc(docRef, { content: htmlContent });
+
   
-      console.log('Content saved successfully to Firestore!');
-    } catch (error) {
-      console.error('Error saving content:', error);
-    }
-  };
+  
+
+//   import { ref, onMounted } from 'vue';
+//   import { QuillEditor } from '@vueup/vue-quill';
+//   import '@vueup/vue-quill/dist/vue-quill.snow.css';
+//   import { db } from '../firebase/firebase.js'; // Import your Firebase configuration
+//   import { doc, setDoc, onSnapshot } from 'firebase/firestore'; // Import Firestore modularly
+//   import { useRouter } from 'vue-router'
+//   const router = useRouter()
+  
+//   const content = ref('');
+//   const options = {
+//     debug: 'info',
+//     placeholder: 'Etwas hier schreiben...',
+//     readOnly: false,
+//     theme: 'snow'
+//   };
+
+//   const logOut = () => {
+//   router.push('/')
+// }
+  
+//   const quillEditor = ref(null);
+  
+//   const docRef = doc(db, 'notes', 'data');
+  
+//   onMounted(() => {
+//     // try {
+//     //   const docSnap = await getDoc(docRef);
+//     //   if (docSnap.exists()) {
+//     //     // Get the HTML content from Firestore
+//     //     const htmlContent = docSnap.data().content;
+//     //     // Set the retrieved content to the 'content' variable
+//     //     content.value = htmlContent;
+//     //   } else {
+//     //     console.log("No such document!");
+//     //   }
+//     // } catch (error) {
+//     //   console.error('Error retrieving content:', error);
+//     // }
+//     onSnapshot(docRef, (docSnapshot) => {
+//       if (docSnapshot.exists()) {
+//         // Get the HTML content from the Firestore document
+//         const htmlContent = docSnapshot.data().content;
+//         // Set the retrieved content to the 'content' variable
+//         content.value = htmlContent;
+//       } else {
+//         console.log("No such document!");
+//       }
+//     });
+  
+//     // // Unsubscribe from real-time updates when component is unmounted
+//     // return () => unsubscribe();
+//   });
+  
+//   const save = async () => {
+//     try {
+//       // Get the HTML content of the Quill editor using document.querySelector
+//       const htmlContent = document.querySelector(".ql-editor").innerHTML;
+  
+//       // Save the HTML content to Firestore
+//       await setDoc(docRef, { content: htmlContent });
+  
+//       console.log('Content saved successfully to Firestore!');
+//     } catch (error) {
+//       console.error('Error saving content:', error);
+//     }
+//   };
   // const save = async () => {
   //   // Trigger auto-save function to save the content
   //   await autoSave();
   // };
   </script>
   
-  <style>
+  <!-- <style>
   .ql-editor {
     height: 72vh;
   }
   </style>
-  
+   -->
