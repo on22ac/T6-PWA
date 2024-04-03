@@ -1,73 +1,35 @@
-<template>
-  <div>
-    <!-- The Quill editor is loaded here -->
-    <QuillEditor v-model="editorContent" toolbar="full" />
+<!-- <template>
 
-    <!-- Button for sharing the contents of Quill-Editor -->
-    <button @click="shareContent" class="share-button">Text teilen</button>
-  </div>
-</template>
+  <nav>
+<router-link to="/"> Home </router-link> |
+<router-link to="/feed"> Feed </router-link> |
+<router-link to="/register"> Register </router-link> |
+<router-link to="/sign-in"> Login </router-link> |
+</nav>
+  <router-view />
+  <QuillEditor toolbar="full" />
+</template> -->
+<!-- <script>
+  import { QuillEditor } from '@vueup/vue-quill'
+  import '@vueup/vue-quill/dist/vue-quill.snow.css';
+  import './assets/toolbar.css'; 
+  // import downloadBtn from './components/downloadBtn.vue';
 
-<script>
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
-
-export default {
-  components: {
-    QuillEditor
-  },
-  data() {
-    return {
-      editorContent: '', // The content of the editor is stored here
-    };
-  },
-  methods: {
-    shareContent() {
-      // Find the Quill-Editor
-      const quillEditor = document.querySelector('.ql-editor');
-
-      // Verify that the Quill editor was found
-      if (quillEditor) {
-        // Get the text content of the Quill editor (without HTML tags)
-        const editorContent = quillEditor.innerText;
-
-        // Create text to share
-        const shareData = {
-          text: editorContent.trim()
-        };
-
-        // Try to share the content
-        try {
-          navigator.share(shareData);
-          console.log('Inhalt erfolgreich geteilt!');
-        } catch(err) {
-          console.error('Fehler beim Teilen:', err);
-        }
-      } else {
-        // Error handling when the Quill editor was not found
-        console.error('Quill-Editor nicht gefunden!');
-      }
-    }
-  }
-}
+</script> -->
+<script setup>
+/**
+ * @author Thi Tuong Vy Nguyen <thi.nguyen.22@lehre.mosbach.dhbw.de>
+ */
 </script>
 
-<style scoped>
-/* Button styles */
-.share-button {
-  background-color: #4CAF50; /* Dark green background */
-  color: white; /* White text color */
-  padding: 10px 20px; /* Padding */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Cursor style */
-  font-size: 16px; /* Font size */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
-}
 
-/* Hover effect */
-.share-button:hover {
-  background-color: #2E7D32; /* Lighter green background on hover */
-  color: black; /* Black text color on hover */
-}
+<template>
+	<!-- The main template for the application -->
+	<!-- This is where the content of app will be displayed. -->
+	<router-view />
+		
+</template>
+
+<style>
 </style>
+
