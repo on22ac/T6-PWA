@@ -52,6 +52,11 @@ const downloadFile = () => {
   // set pdf form options ------------------------------------------
   const options = {
     margin: 15,
+    font: { family: 'inherit' }, 
+    /* TODO: 
+      - sans serif font is not displayed correctly in the generated PDF
+      - solution could not be found yet
+    */
     filename: fileNameValue + 'pdf',
     pagebreak: { mode: ['avoid-all'] },
     html2canvas: {},
@@ -68,9 +73,7 @@ const downloadFile = () => {
 const getEditorHTML = () => {
   // quill instance
   const quillEditor = document.querySelector('.ql-editor');
-  // return quillEditor.innerHTML;
 
-  
   // REMOVE INPUT BOX IN PDF FILE ---------------------------------
   // clone editor element
   const clonedEditor = quillEditor.cloneNode(true);
