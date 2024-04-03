@@ -22,7 +22,8 @@ nav a.router-link-exact-active {
     margin: 15px 0px;
     display: flex;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 /* Button */
@@ -49,6 +50,7 @@ button:hover {
     border-style: solid;
     color: #218087;
     font-weight: bold;
+    min-width: fit-content;
 }
 
 .logout {
