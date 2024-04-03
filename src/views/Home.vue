@@ -2,6 +2,7 @@
     <!-- <navBar />
     <Editor :content="content"/> -->
     <downloadFile />
+    <button @click=signOut>Log Out</button>
     <div class="wrapper">
       <QuillEditor
       class="editor"
@@ -26,6 +27,8 @@
   // css import
   import '../assets/style.css';
   import '../assets/toolbar.css';
+
+  import { useRouter } from 'vue-router'
 
 
 
@@ -53,6 +56,11 @@
     readOnly: false,
     theme: 'snow'
   };
+
+  const router = useRouter()
+  const signOut = () => {
+      router.push('/')
+  }
 
   const quillEditor = ref(null);
 
