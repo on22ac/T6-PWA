@@ -1,6 +1,7 @@
 <template>
     <!-- <navBar />
     <Editor :content="content"/> -->
+
     <downloadFile />
     <button @click=signOut>Log Out</button>
     <div class="wrapper">
@@ -12,15 +13,16 @@
       :options="options"
       ref="quillEditor"
       @editorChange="autoSave"
-      
       />
+
     </div>
-   
 
       <!-- <h1> {{ content }} </h1> -->
     
     <Share/>
-    <!-- <Save /> -->
+
+     <!-- <Save /> -->
+ 
   </template>
   
   <script setup>
