@@ -8,10 +8,11 @@
     </nav>
     <p><button @click="home">Home</button></p>
 </template>
+
 <script setup>
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const home = () => {
-  router.push('/home')
-}
+    import { useRouter } from 'vue-router'
+    const router = useRouter()
+    const home = () => {
+    router.push('/home')
+    }
 </script>
