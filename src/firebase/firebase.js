@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 // import { getFirestore } from 'firebase/firestore';
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,15 +17,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 // const db = getFirestore(app)
 
-  const db = getDatabase(app);
-  const reference = ref(db, 'notes/'+ 'data/')
+const db = getDatabase(app);
+const reference = ref(db, 'notes/data/')
   
-  set(reference,{
-    content: content
-  })
 
-writeData("hi")
+
 
 export{
-    db
+    db,
+    reference
 }
