@@ -22,6 +22,7 @@
  */
 </script>
 
+
 <template>
 	<!-- The main template for the application -->
 	<!-- This is where the content of app will be displayed. -->
