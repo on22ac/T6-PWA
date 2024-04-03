@@ -15,6 +15,7 @@ html {
     background-color: rgb(249, 252, 255);
     width: 100%;
     padding: 8px;
+    align-items: center;
 }
 
 .logo {
@@ -70,4 +71,14 @@ html {
 .loginInfo{
     margin: 20px 0px 0px 0px;
     padding: 0px;
+}
+
+
+.links {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#clickMe {
+    color: #b93f95;
+    font-weight: bold;
 }
