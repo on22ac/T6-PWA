@@ -4,12 +4,13 @@
     <downloadFile />
     <div class="wrapper">
       <QuillEditor
-      class="ql-editor"
+      class="editor"
       v-model:content="content"
       contentType="html"
       toolbar="full"
       :options="options"
       ref="quillEditor"
+      @editorChange="autoSave"
       
       />
     </div>
@@ -18,7 +19,7 @@
       <!-- <h1> {{ content }} </h1> -->
     
     <Share/>
-    <Sync />
+    <!-- <Save /> -->
   </template>
   
   <script setup>
@@ -28,7 +29,7 @@
 
 
 
-  import Sync from '../components/Sync.vue'
+  // import Save from '../components/Save.vue'
   import downloadFile from '../components/downloadFile.vue';
   import Share from '../components/Share.vue'
 
@@ -36,10 +37,14 @@
   import { QuillEditor } from '@vueup/vue-quill';
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
+  import { reference } from '@/firebase/firebase'
+  import { onValue, update, set } from 'firebase/database';
+  import { debounce } from 'lodash-es';
+
   // import { db } from '../firebase/firebase.js'; // Import your Firebase configuration
   // import { doc, onSnapshot } from 'firebase/firestore'; // Import Firestore modularly
 
-  
+ 
 
   const content = ref('');
   const options = {
@@ -52,8 +57,34 @@
   const quillEditor = ref(null);
 
   // const docRef = doc(db, 'notes', 'data');
+  const debouncedOnValue = debounce(onValue, 1000); // Debounce with a wait time of 1000 milliseconds
+
+  onMounted(() => {
+  debouncedOnValue(reference, (snapshot) => {
+    content.value = snapshot.val().content;
+    console.log(content.value);
+  });
+});
 
 
+// Debounce the autosave function with a delay of 1000 milliseconds
+const autoSave = debounce(() => {
+  set(reference, {
+    content: document.querySelector(".ql-editor").innerHTML
+  }).then(() => {
+    console.log("Data Auto-Saved Successfully");
+  }).catch(() => {
+    console.error("Auto-Save Unsuccessful");
+  });
+}, 1000);
+
+
+// onMounted(()=>{
+//   onValue(reference, (snapshot) => {
+//     content.value = snapshot.val().content
+//     console.log(content.value)
+//   })
+// })
   // onMounted(() => {
     // try {
     //   const docSnap = await getDoc(docRef);
