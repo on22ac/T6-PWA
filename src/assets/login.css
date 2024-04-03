@@ -1,0 +1,85 @@
+/* @author Lorena Horvat */
+
+body {
+    background-color: #c7e6fd;
+}
+
+html {
+    margin: 0px;
+    padding: 0px;
+    /*background-color: rgb(249, 252, 255);*/
+    background-color: #c7e6fd;
+}
+
+.navBar {
+    background-color: rgb(249, 252, 255);
+    width: 100%;
+    padding: 8px;
+    align-items: center;
+    margin: 0px;
+}
+
+.logo {
+    margin: 5px;
+    height: 40px;
+    width: 190.66px;
+}
+
+.content {
+    background-color: #c7e6fd;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #15474b;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 5px;
+}
+
+.btnContainer {
+    margin-bottom: 70px;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: none;
+}
+
+/* File name Input Field */
+.loginInput {
+    padding: 7px 12px;
+    font-size: small;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    border-style: solid;
+    border-color: #2c9aa1;
+    min-width: 176.8px;
+}
+
+.imgLogin {
+    height: 250px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginInfo{
+    margin: 20px 0px 0px 0px;
+    padding: 0px;
+}
+
+
+.links {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#clickMe {
+    color: #b93f95;
+    font-weight: bold;
+}
