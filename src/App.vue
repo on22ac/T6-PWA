@@ -28,20 +28,3 @@ const quillContent = ref("")
   <QuillEditor class="ql-editor" v-model:content="quillContent" toolbar="full" ref="quill" content-type="html" />
 
 </template>
-
-
-<style>
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b9b5;
-}
-
-</style>
