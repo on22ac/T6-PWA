@@ -14,8 +14,8 @@
     <div class="content">
 
         <div class="userInfo">
-            <h1 class="loginInfo">Willkommen zurück!</h1>
-            <p>Schön, dass du zurück bist. Hier kannst du dich wieder mit deinen Anmeldedaten anmelden.</p>
+            <h1 align="center" class="loginInfo">Willkommen zurück!</h1>
+            <p align="center">Schön, dass du zurück bist. Hier kannst du dich wieder mit deinen Anmeldedaten anmelden.</p>
         </div>
 
         <div>

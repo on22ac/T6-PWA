@@ -10,9 +10,9 @@
   <div class="content">
 
     <div class="userInfo">
-      <h1 class="loginInfo">Neuen Account erstellen</h1>
-      <p>Willkommen! Bitte gib eine gültige E-Mail-Adresse und ein Passwort ein! <br>
-      Oder hast du schon ein Konto? Dann kannst du dich <span id="clickMe" @click="signIn">hier einloggen</span>!</p>
+      <h1 align="center" class="loginInfo">Neuen Account erstellen</h1>
+      <p align="center">Willkommen! Bitte gib eine gültige E-Mail-Adresse und ein sicheres Passwort an! <br>
+        Danach kannst du dich<span id="clickMe" @click="signIn"> hier einloggen</span>!</p>
     </div>
 
     <div>
