@@ -71,7 +71,7 @@
     // quill instance
     // const htmlContent = document.querySelector(".ql-editor").innerHTML;
     // return htmlContent
-    const editorElement = document.querySelector(".ql-editor");
+    const editorElement = document.querySelector(".editor");
     if (editorElement) {
         // Clone the editor element
         const clonedEditor = editorElement.cloneNode(true);

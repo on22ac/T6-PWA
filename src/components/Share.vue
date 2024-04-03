@@ -7,7 +7,7 @@
 
 <script setup>
 const shareContent = ()=>{
-  const editorElement = document.querySelector('.ql-editor');
+  const editorElement = document.querySelector('.editor');
 
       // Verify that the Quill editor was found
       if (editorElement) {
