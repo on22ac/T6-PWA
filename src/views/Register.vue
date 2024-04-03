@@ -1,13 +1,18 @@
 <template>
   <div class="navBar">
     <img src="../assets/NotizenAppLogo.svg" alt="logo" class="logo">
+    <nav class="links">
+      <router-link to="/">Anmelden</router-link> |
+      <router-link to="/register"> Registrieren </router-link>
+    </nav>
   </div>
 
   <div class="content">
 
     <div class="userInfo">
-    <h1 class="loginInfo">Neuen Account erstellen</h1>
-    <p>Willkommen! Bitte gib eine gültige E-Mail-Adresse und ein Passwort ein!</p>
+      <h1 class="loginInfo">Neuen Account erstellen</h1>
+      <p>Willkommen! Bitte gib eine gültige E-Mail-Adresse und ein Passwort ein! <br>
+      Oder hast du schon ein Konto? Dann kannst du dich <span id="clickMe" @click="signIn">hier einloggen</span>!</p>
     </div>
 
     <div>
@@ -21,9 +26,9 @@
 
     <div class="btnContainer">
       <p class="btns submitBtn"><button @click="register">Anmelden</button></p>
-      <p class="btns"><button @click="signIn">Einloggen</button></p>
       <p class="btns"><button @click="signInWithGoogle">Mit Google anmelden</button></p>
     </div>
+
 
   </div>
 
