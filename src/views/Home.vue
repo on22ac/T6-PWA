@@ -1,9 +1,19 @@
 <template>
+
+<div class="navBar">
+    <img src="../assets/NotizenAppLogo.svg" alt="logo" class="logo">
+    <a class="logout" @click=signOut>Log Out</a>
+  </div>    
+
     <!-- <navBar />
     <Editor :content="content"/> -->
 
-    <downloadFile />
-    <button @click=signOut>Log Out</button>
+<div class="btnContainer">
+  <downloadFile />
+    <Share/>
+</div>
+    
+    
     <div class="wrapper">
       <QuillEditor
       class="editor"
@@ -18,8 +28,6 @@
     </div>
 
       <!-- <h1> {{ content }} </h1> -->
-    
-    <Share/>
 
      <!-- <Save /> -->
  
@@ -210,3 +218,15 @@ const autoSave = debounce(() => {
   }
   </style>
    -->
+
+<style scoped>
+
+html {
+  background-color: aliceblue;
+}
+
+body {
+  background-color: aliceblue;
+}
+
+</style>

@@ -16,6 +16,15 @@ nav a.router-link-exact-active {
 }
 
 /* --------------- Button and Input field Styling: colours, etc. --------------- */
+
+.btnContainer {
+    background-color: #c7e6fd;
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
 /* Button */
 button {
     padding: 7px 12px;
@@ -27,10 +36,32 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left: 10px;
+    height: 34px;
 }
 
 button:hover {
     background-color: #376782;
+}
+
+#share {
+    background-color: #c7e6fd;
+    border: #218087;
+    border-style: solid;
+    color: #218087;
+    font-weight: bold;
+}
+
+.logout {
+    margin-right: 20px;
+    background-color: #af6ab4;
+    padding: 7px 12px;
+    color: aliceblue;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 }
 
 /* File name Input Field */

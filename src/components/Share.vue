@@ -1,11 +1,14 @@
 <template>
 
     <!-- Button for sharing the contents of Quill-Editor -->
-    <button @click="shareContent">Notiz Teilen</button>
+    <button id="share" @click="shareContent">Notiz Teilen</button>
   
 </template>
 
 <script setup>
+
+import '../assets/style.css';
+
 const shareContent = ()=>{
   const editorElement = document.querySelector('.editor');
 
