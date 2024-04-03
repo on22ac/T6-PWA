@@ -68,7 +68,21 @@ const downloadFile = () => {
 const getEditorHTML = () => {
   // quill instance
   const quillEditor = document.querySelector('.ql-editor');
-  return quillEditor.innerHTML;
+  // return quillEditor.innerHTML;
+
+  
+  // REMOVE INPUT BOX IN PDF FILE ---------------------------------
+  // clone editor element
+  const clonedEditor = quillEditor.cloneNode(true);
+
+  // remove input elements
+  const inputElements = clonedEditor.querySelectorAll('input');
+  inputElements.forEach(element => {
+    element.parentNode.removeChild(element);
+  });
+
+  // return inner HTML 
+  return clonedEditor.innerHTML;
 };
 
 </script>
