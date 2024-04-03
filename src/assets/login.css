@@ -31,7 +31,7 @@ html {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
-    margin: 0px;
+    padding: 5px;
 }
 
 .btnContainer {
@@ -59,4 +59,15 @@ html {
 
 .imgLogin {
     height: 250px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginInfo{
+    margin: 20px 0px 0px 0px;
+    padding: 0px;
 }

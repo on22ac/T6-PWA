@@ -5,7 +5,11 @@
 
   <div class="content">
 
-    <h1>Create an Account</h1>
+    <div class="userInfo">
+    <h1 class="loginInfo">Neuen Account erstellen</h1>
+    <p>Willkommen! Bitte gib eine gültige E-Mail-Adresse und ein Passwort ein!</p>
+    </div>
+
     <div>
       <img src="../assets/img.png" class="imgLogin">
     </div>
@@ -16,9 +20,9 @@
     </div>
 
     <div class="btnContainer">
-      <p class="btns submitBtn"><button @click="register">Submit</button></p>
-      <p class="btns"><button @click="signIn">Melde mich an</button></p>
-      <p class="btns"><button @click="signInWithGoogle">Sign In With Google</button></p>
+      <p class="btns submitBtn"><button @click="register">Anmelden</button></p>
+      <p class="btns"><button @click="signIn">Einloggen</button></p>
+      <p class="btns"><button @click="signInWithGoogle">Mit Google anmelden</button></p>
     </div>
 
   </div>
