@@ -15,16 +15,17 @@ const password = ref("");
 const errMsg = ref("");
 
 const router = useRouter()
-
+// Email and password authentication
 const signIn = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((data) => {
             console.log("Successfully signed in!");
             console.log(auth.currentUser);
-            router.push("/home");
+            router.push("/home"); // Redirect to home page on successful login
         })
         .catch((error) => {
+            //Login error messages
             console.log(error.code);
             switch (error.code) {
                 case "auth/invalid-email":
@@ -44,6 +45,7 @@ const signIn = () => {
         });
 };
 
+//Google OAuth authentication
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider)

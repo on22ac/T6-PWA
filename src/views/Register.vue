@@ -21,11 +21,11 @@ const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       console.log("Successfully registered!");
-      router.push('/') // redirect to the feed
+      router.push('/') // redirect to the sign in page on successful registration
     })
     .catch((error) => {
-      // console.log(error.code);
-      // alert(error.message);
+
+      //Registration error messages
 
       console.log(error.code);
             switch (error.code) {
