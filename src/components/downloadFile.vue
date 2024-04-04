@@ -1,6 +1,8 @@
 <template>
+<!-- @author Lorena Horvat - Lorena-Hrvt & Thi Tuong Vy Nguyen -->
 
   <div class="btnContainer">
+
     <!-- FILE NAME  ---------------------------------------------------- -->
 
     <input class="filename" type="text" v-model="fileName" placeholder="Unbenannt" />
@@ -23,22 +25,18 @@
 
 <script setup>
 
-// imports -------------------------------------------------------
-// import { defineProps } from "vue";
+// imports --------------------------------------------------------------- @Lorena-Hrvt
+
 import { ref } from 'vue';
 import html2pdf from 'html2pdf.js';
 
 // css import
 import '../assets/style.css';
 
-
-
-// set ref for file name -----------------------------------------
+// set ref for file name ------------------------------------------------- @Lorena-Hrvt
 const fileName = ref('');
 
-// const props = defineProps({ content: String });
-
-// download function ---------------------------------------------
+// download function ----------------------------------------------------- @Lorena-Hrvt
 const downloadFile = () => {
 
   const fileNameValue = fileName.value;
@@ -46,11 +44,16 @@ const downloadFile = () => {
   // get semantic HTML representation of the editor content
   const editorHTML = getEditorHTML();
 
-  console.log(editorHTML);
+  // console.log(editorHTML);
 
-  // set pdf form options ------------------------------------------
+  // set pdf form options ------------------------------------------------ @Lorena-Hrvt
   const pdfOptions = {
     margin: 15,
+    font: { family: 'inherit' }, 
+    /* TODO: 
+      - sans serif font is not displayed correctly in the generated PDF
+      - solution could not be found yet
+    */
     filename: fileNameValue,
     pagebreak: { mode: ['avoid-all'] },
     html2canvas: {},
@@ -58,25 +61,28 @@ const downloadFile = () => {
     enableLinks: true
   };
 
-  // generate pdf and download ------------------------------------
+  // generate pdf and download ------------------------------------------- @Lorena-Hrvt
   html2pdf().from(editorHTML).set(pdfOptions).save();
 
 };
 
-// get semantic HTML representation of the content
+// get semantic HTML representation of the content ----------------------- @Lorena-Hrvt
 const getEditorHTML = () => {
   // quill instance
-  // const htmlContent = document.querySelector(".ql-editor").innerHTML;
   // return htmlContent
-  const editorElement = document.querySelector(".editor");
+  const editorElement = document.querySelector(".editor"); // ------ @Vy & @Lorena-Hrvt
+
   if (editorElement) {
-    // Clone the editor element
+    // clone the editor element
     const clonedEditor = editorElement.cloneNode(true);
-    // Remove Quill-specific elements
+
+    // remove Quill-specific elements
     clonedEditor.querySelectorAll('.ql-clipboard, .ql-tooltip').forEach(el => el.remove());
-    // Extract HTML content from the cloned editor
+
+    // extract HTML content from the cloned editor
     const htmlContent = clonedEditor.innerHTML;
     return htmlContent;
+
   } else {
     console.error("Quill editor element not found.");
     return "";

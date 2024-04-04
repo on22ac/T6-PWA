@@ -1,4 +1,4 @@
-/* @author Lorena Horvat */
+/* @author Lorena Horvat - Lorena-Hrvt */
 
 /* --------------- Quill Editor Styling: colours, etc. -------------------------- */
 
@@ -19,7 +19,7 @@ nav a.router-link-exact-active {
 
 .btnContainer {
     background-color: #c7e6fd;
-    margin: 15px 0px;
+    margin: 15px 0px 5px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -37,6 +37,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left: 10px;
+    margin-right: 5px;
     height: 34px;
 }
 
@@ -51,6 +52,8 @@ button:hover {
     color: #218087;
     font-weight: bold;
     min-width: fit-content;
+    margin-left: 0px;
+    margin-top: 10px;
 }
 
 .logout {
@@ -98,4 +101,22 @@ button:hover {
 
 .pdfContentContainer {
     width: 100%;
+}
+
+
+.undoRedo{
+    display: flex;
+}
+
+.urdoBtn {
+    margin: 0px 5px 5px 0px;
+    background-color:#c7e6fd;
+    color: #af6ab4;
+    border-color: #af6ab4;
+    border-style: solid;
+    font-weight: bold;
+}
+
+.urdoBtn:hover {
+    background-color: #dab2dd;
 }

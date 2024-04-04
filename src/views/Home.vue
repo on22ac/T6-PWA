@@ -15,8 +15,11 @@
 </div>
 
 <!-- These two buttons trigger the "Undo" and "Redo" functions respectively when clicked. -->
-    <button @click="undo">Undo</button>
-    <button @click="redo">Redo</button>
+<!-- @Lorena: Assets src: https://www.flaticon.com/free-icon/undo_3502539?term=undo&page=1&position=3&origin=tag&related_id=3502539 -->
+    <div class="undoRedo">
+      <button class="urdoBtn" @click="undo"><img src="../assets/undo.png" height="17px"></button>
+      <button class="urdoBtn" @click="redo"><img src="../assets/redo.png" height="17px"></button>
+    </div>
 
     <div class="wrapper">
       <QuillEditor
@@ -230,12 +233,6 @@ const autoSave = debounce(() => {
   // };
   </script>
   
-  <!-- <style>
-  .ql-editor {
-    height: 72vh;
-  }
-  </style>
-   -->
 
 <style scoped>
 
