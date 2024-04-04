@@ -17,23 +17,16 @@
 
 </script> -->
 <script setup>
-/**
+/*
  * @author Thi Tuong Vy Nguyen <thi.nguyen.22@lehre.mosbach.dhbw.de>
  */
-
 
 </script>
 
 
 <template>
-	<!-- The main template for the application -->
-	<!-- This is where the content of app will be displayed. -->
-	<router-view />
+  <!-- The main template for the application -->
+  <!-- This is where the content of app will be displayed. -->
+  <router-view />
 
-  
-		
 </template>
-
-<style>
-</style>
-
