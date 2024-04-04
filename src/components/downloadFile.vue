@@ -1,5 +1,5 @@
 <template>
-<!-- @author Lorena Horvat - Lorena-Hrvt -->
+<!-- @author Lorena Horvat - Lorena-Hrvt & Thi Tuong Vy Nguyen -->
 
   <div class="btnContainer">
 
@@ -70,7 +70,7 @@ const downloadFile = () => {
 const getEditorHTML = () => {
   // quill instance
   // return htmlContent
-  const editorElement = document.querySelector(".editor");
+  const editorElement = document.querySelector(".editor"); // ------ @Vy & @Lorena-Hrvt
 
   if (editorElement) {
     // clone the editor element
