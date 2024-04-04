@@ -1,5 +1,81 @@
+<script setup>
+/**
+ * @author Lorena Horvat <github: Lorena-Hrvt>
+ */
+
+// imports 
+import { ref } from 'vue';
+import html2pdf from 'html2pdf.js';
+
+// css import
+import '../assets/style.css';
+
+// set ref for file name 
+const fileName = ref('');
+
+// download function 
+const downloadFile = () => {
+
+  const fileNameValue = fileName.value;
+
+  // get semantic HTML representation of the editor content
+  const editorHTML = getEditorHTML();
+
+  // set pdf form options 
+  const pdfOptions = {
+    margin: 15,
+    font: { family: 'inherit' }, 
+    /* TODO: 
+      - sans serif font is not displayed correctly in the generated PDF
+      - solution could not be found yet
+    */
+    filename: fileNameValue,
+    pagebreak: { mode: ['avoid-all'] },
+    html2canvas: {},
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    enableLinks: true
+  };
+
+  // generate pdf and download 
+  html2pdf().from(editorHTML).set(pdfOptions).save();
+
+};
+
+
+/**
+ * @author Lorena Horvat <github: Lorena-Hrvt>
+ * @author Thi Tuong Vy Nguyen <github: on22vy>
+ */
+// get semantic HTML representation of the content 
+const getEditorHTML = () => {
+  // quill instance
+  // return htmlContent
+  const editorElement = document.querySelector(".editor"); 
+
+  if (editorElement) {
+    // clone the editor element
+    const clonedEditor = editorElement.cloneNode(true);
+
+    // remove Quill-specific elements
+    clonedEditor.querySelectorAll('.ql-clipboard, .ql-tooltip').forEach(el => el.remove());
+
+    // extract HTML content from the cloned editor
+    const htmlContent = clonedEditor.innerHTML;
+    return htmlContent;
+
+  } else {
+    console.error("Quill editor element not found.");
+    return "";
+  }
+};
+
+</script>
+
+
 <template>
-<!-- @author Lorena Horvat - Lorena-Hrvt & Thi Tuong Vy Nguyen -->
+
+<!-- @author Lorena Horvat <github: Lorena-Hrvt> -->
+ 
 
   <div class="btnContainer">
 
@@ -23,70 +99,3 @@
 </template>
 
 
-<script setup>
-
-// imports --------------------------------------------------------------- @Lorena-Hrvt
-
-import { ref } from 'vue';
-import html2pdf from 'html2pdf.js';
-
-// css import
-import '../assets/style.css';
-
-// set ref for file name ------------------------------------------------- @Lorena-Hrvt
-const fileName = ref('');
-
-// download function ----------------------------------------------------- @Lorena-Hrvt
-const downloadFile = () => {
-
-  const fileNameValue = fileName.value;
-
-  // get semantic HTML representation of the editor content
-  const editorHTML = getEditorHTML();
-
-  // console.log(editorHTML);
-
-  // set pdf form options ------------------------------------------------ @Lorena-Hrvt
-  const pdfOptions = {
-    margin: 15,
-    font: { family: 'inherit' }, 
-    /* TODO: 
-      - sans serif font is not displayed correctly in the generated PDF
-      - solution could not be found yet
-    */
-    filename: fileNameValue,
-    pagebreak: { mode: ['avoid-all'] },
-    html2canvas: {},
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    enableLinks: true
-  };
-
-  // generate pdf and download ------------------------------------------- @Lorena-Hrvt
-  html2pdf().from(editorHTML).set(pdfOptions).save();
-
-};
-
-// get semantic HTML representation of the content ----------------------- @Lorena-Hrvt
-const getEditorHTML = () => {
-  // quill instance
-  // return htmlContent
-  const editorElement = document.querySelector(".editor"); // ------ @Vy & @Lorena-Hrvt
-
-  if (editorElement) {
-    // clone the editor element
-    const clonedEditor = editorElement.cloneNode(true);
-
-    // remove Quill-specific elements
-    clonedEditor.querySelectorAll('.ql-clipboard, .ql-tooltip').forEach(el => el.remove());
-
-    // extract HTML content from the cloned editor
-    const htmlContent = clonedEditor.innerHTML;
-    return htmlContent;
-
-  } else {
-    console.error("Quill editor element not found.");
-    return "";
-  }
-};
-
-</script>

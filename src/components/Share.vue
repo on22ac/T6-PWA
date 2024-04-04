@@ -1,11 +1,7 @@
-<template>
-
-    <!-- Button for sharing the contents of Quill-Editor -->
-    <button id="share" @click="shareContent">Notiz Teilen</button>
-  
-</template>
-
 <script setup>
+/**
+ * @author Acelya Cagan <github: on22ac>
+ */
 
 import '../assets/style.css';
 
@@ -35,3 +31,11 @@ const shareContent = ()=>{
       }
 }
 </script>
+
+
+<template>
+    <!-- Button for sharing the contents of Quill-Editor -->
+    <button id="share" @click="shareContent">Notiz Teilen</button>
+  
+</template>
+

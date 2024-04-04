@@ -1,3 +1,7 @@
+/**
+ * @author Thi Tuong Vy Nguyen <github: on22vy>
+ */
+
 import { initializeApp } from 'firebase/app'
 // import { getFirestore } from 'firebase/firestore';
 import { getDatabase, ref, set, get } from "firebase/database";
