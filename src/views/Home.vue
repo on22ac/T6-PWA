@@ -1,26 +1,130 @@
+<script setup>
+/**
+ * @author Thi Tuong Vy Nguyen <github: on22vy>
+ */
+
+  //------------------------Imports----------------------------- //
+    // Import CSS files for styling the component
+    import '../assets/style.css';
+    import '../assets/toolbar.css';
+
+    // Import useRouter function from vue-router for navigation
+    import { useRouter } from 'vue-router'
+
+    // Import components for file download and sharing
+    import downloadFile from '../components/downloadFile.vue';
+    import Share from '../components/Share.vue'
+
+    // Import functions and hooks from Vue for use in the component
+    import { ref, onMounted } from 'vue';
+
+    // Import Quill Editor and its associated CSS file
+    import { QuillEditor } from '@vueup/vue-quill';
+    import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
+    // Import functions and database references from Firebase
+    import { reference } from '@/firebase/firebase'
+    import { onValue, set } from 'firebase/database';
+
+    // Import debounce function from lodash for debouncing
+    import { debounce } from 'lodash-es';
+    
+    // // Import useRefHistory function from the "@vueuse/core" package for using undo/redo functionality
+    import { useRefHistory } from "@vueuse/core";
+
+  
+
+/**
+ * @author Thi Tuong Vy Nguyen <github: on22vy>
+ * @author Lea Dotterweich <github: lea_dtwh>
+ */
+
+  //------------------------Undo/Redo Function----------------------------- //
+    // Define a reactive reference named 'content', initialized with an empty string.
+    const content = ref('');
+
+    // Declaration of 'undo' and 'redo' by destructuring the result of the useRefHistory function applied to 'content'
+    const {
+      undo,
+      redo
+
+    } = useRefHistory(content)
+
+  
+
+/**
+ * @author Thi Tuong Vy Nguyen <github: on22vy>
+ */
+    // Options for the Quill Editor
+    const options = {
+      debug: 'info',
+      placeholder: 'Etwas hier schreiben...',
+      readOnly: false,
+      theme: 'snow'
+    };
+
+  //------------------------Sync & AutoSave Function----------------------------- //
+    // Reference to the Quill Editor
+    const quillEditor = ref(null);
+
+    // Debounced function for listening to changes in the Firebase database
+    const debouncedOnValue = debounce(onValue, 1000); // Debounce with a wait time of 1000 milliseconds
+
+    // Once the component is mounted, start listening for changes in the Firebase database
+    onMounted(() => {
+    debouncedOnValue(reference, (snapshot) => {
+      content.value = snapshot.val().content;
+      console.log(content.value);
+    });
+    });
+
+
+    // Debounced the autosave function with a delay of 1000 milliseconds for automatically saving content to the Firebase database
+    const autoSave = debounce(() => {
+    set(reference, {
+      content: document.querySelector(".ql-editor").innerHTML
+    }).then(() => {
+      console.log("Data Auto-Saved Successfully");
+    }).catch(() => {
+      console.error("Auto-Save Unsuccessful");
+    });
+    }, 1000);
+
+  //------------------------Sign out function----------------------------- //
+    // Instantiate the router
+    const router = useRouter()
+    // Function to sign out the user, by sign out user will be redirected back to Login Page
+    const signOut = () => {
+    router.push('/')
+    }
+
+</script>
+
 <template>
 
-<div class="navBar">
-    <img src="../assets/NotizenAppLogo.svg" alt="logo" class="logo">
-    <a class="logout" @click=signOut>Log Out</a>
-  </div>    
+<!-- @author Thi Tuong Vy Nguyen <github: on22vy> -->
 
-    <!-- <navBar />
-    <Editor :content="content"/> -->
-
-<div class="btnContainer">
-  <downloadFile />
-    <Share/>
+    <!-- Navigation bar with logo and logout button -->
+    <div class="navBar">
+      <img src="../assets/NotizenAppLogo.svg" alt="logo" class="logo">
+      <a class="logout" @click=signOut>Log Out</a>
+    </div>   
     
-</div>
-
-<!-- These two buttons trigger the "Undo" and "Redo" functions respectively when clicked. -->
-<!-- @Lorena: Assets src: https://www.flaticon.com/free-icon/undo_3502539?term=undo&page=1&position=3&origin=tag&related_id=3502539 -->
+    <!-- Container for file download and sharing buttons -->
+    <div class="btnContainer">
+      <downloadFile />
+      <Share/>
+    </div>
+    
+    <!-- Undo/Redo buttons for editor -->
+    <!-- These two buttons trigger the "Undo" and "Redo" functions respectively when clicked. -->
+    <!-- @Lorena: Assets src: https://www.flaticon.com/free-icon/undo_3502539?term=undo&page=1&position=3&origin=tag&related_id=3502539 -->
     <div class="undoRedo">
       <button class="urdoBtn" @click="undo"><img src="../assets/undo.png" height="17px"></button>
       <button class="urdoBtn" @click="redo"><img src="../assets/redo.png" height="17px"></button>
     </div>
-
+    
+    <!-- Wrapper for Quill Editor component -->
     <div class="wrapper">
       <QuillEditor
       class="editor"
@@ -33,215 +137,23 @@
       />
 
     </div>
-
-
-
-      <!-- <h1> {{ content }} </h1> -->
-
-     <!-- <Save /> -->
- 
-  </template>
-  
-  <script setup>
-  // css import
-  import '../assets/style.css';
-  import '../assets/toolbar.css';
-  
-
-  import { useRouter } from 'vue-router'
-
-
-
-  // import Save from '../components/Save.vue'
-  import downloadFile from '../components/downloadFile.vue';
-  import Share from '../components/Share.vue'
-
-  import { ref, onMounted } from 'vue';
-  import { QuillEditor } from '@vueup/vue-quill';
-  import '@vueup/vue-quill/dist/vue-quill.snow.css';
-
-  import { reference } from '@/firebase/firebase'
-  import { onValue, update, set } from 'firebase/database';
-  import { debounce } from 'lodash-es';
-
-  // This imports the useRefHistory function from the "@vueuse/core" library.
-  import { useRefHistory } from "@vueuse/core";
-
-  // import { db } from '../firebase/firebase.js'; // Import your Firebase configuration
-  // import { doc, onSnapshot } from 'firebase/firestore'; // Import Firestore modularly
-
- 
-// This defines a reactive reference named 'content' initialized with an empty string.
-// It also initializes two variables, 'undo' and 'redo', by destructuring the result of the useRefHistory function applied to the 'content'.
-  const content = ref('');
-  const {
-    undo,
-    redo
-
-} = useRefHistory(content)
-
-  const options = {
-    debug: 'info',
-    placeholder: 'Etwas hier schreiben...',
-    readOnly: false,
-    theme: 'snow'
-  };
-
-  const router = useRouter()
-  const signOut = () => {
-      router.push('/')
-  }
-
-  const quillEditor = ref(null);
-
-  // const docRef = doc(db, 'notes', 'data');
-  const debouncedOnValue = debounce(onValue, 1000); // Debounce with a wait time of 1000 milliseconds
-
-  onMounted(() => {
-  debouncedOnValue(reference, (snapshot) => {
-    content.value = snapshot.val().content;
-    console.log(content.value);
-  });
-});
-
-
-// Debounce the autosave function with a delay of 1000 milliseconds
-const autoSave = debounce(() => {
-  set(reference, {
-    content: document.querySelector(".ql-editor").innerHTML
-  }).then(() => {
-    console.log("Data Auto-Saved Successfully");
-  }).catch(() => {
-    console.error("Auto-Save Unsuccessful");
-  });
-}, 1000);
-
-
-
-// onMounted(()=>{
-//   onValue(reference, (snapshot) => {
-//     content.value = snapshot.val().content
-//     console.log(content.value)
-//   })
-// })
-  // onMounted(() => {
-    // try {
-    //   const docSnap = await getDoc(docRef);
-    //   if (docSnap.exists()) {
-    //     // Get the HTML content from Firestore
-    //     const htmlContent = docSnap.data().content;
-    //     // Set the retrieved content to the 'content' variable
-    //     content.value = htmlContent;
-    //   } else {
-    //     console.log("No such document!");
-    //   }
-    // } catch (error) {
-    //   console.error('Error retrieving content:', error);
-    // }
-    // onSnapshot(docRef, (docSnapshot) => {
-    //   if (docSnapshot.exists()) {
-    //     // Get the HTML content from the Firestore document
-    //     const htmlContent = docSnapshot.data().content;
-    //     // Set the retrieved content to the 'content' variable
-    //     content.value = htmlContent;
-    //   } else {
-    //     console.log("No such document!");
-    //   }
-    // });
-
-
-  
-    // // Unsubscribe from real-time updates when component is unmounted
-    // return () => unsubscribe();
-  // });
-
-  
-  
-
-  
-  
-
-//   import { ref, onMounted } from 'vue';
-//   import { QuillEditor } from '@vueup/vue-quill';
-//   import '@vueup/vue-quill/dist/vue-quill.snow.css';
-//   import { db } from '../firebase/firebase.js'; // Import your Firebase configuration
-//   import { doc, setDoc, onSnapshot } from 'firebase/firestore'; // Import Firestore modularly
-//   import { useRouter } from 'vue-router'
-//   const router = useRouter()
-  
-//   const content = ref('');
-//   const options = {
-//     debug: 'info',
-//     placeholder: 'Etwas hier schreiben...',
-//     readOnly: false,
-//     theme: 'snow'
-//   };
-
-//   const logOut = () => {
-//   router.push('/')
-// }
-  
-//   const quillEditor = ref(null);
-  
-//   const docRef = doc(db, 'notes', 'data');
-  
-//   onMounted(() => {
-//     // try {
-//     //   const docSnap = await getDoc(docRef);
-//     //   if (docSnap.exists()) {
-//     //     // Get the HTML content from Firestore
-//     //     const htmlContent = docSnap.data().content;
-//     //     // Set the retrieved content to the 'content' variable
-//     //     content.value = htmlContent;
-//     //   } else {
-//     //     console.log("No such document!");
-//     //   }
-//     // } catch (error) {
-//     //   console.error('Error retrieving content:', error);
-//     // }
-//     onSnapshot(docRef, (docSnapshot) => {
-//       if (docSnapshot.exists()) {
-//         // Get the HTML content from the Firestore document
-//         const htmlContent = docSnapshot.data().content;
-//         // Set the retrieved content to the 'content' variable
-//         content.value = htmlContent;
-//       } else {
-//         console.log("No such document!");
-//       }
-//     });
-  
-//     // // Unsubscribe from real-time updates when component is unmounted
-//     // return () => unsubscribe();
-//   });
-  
-//   const save = async () => {
-//     try {
-//       // Get the HTML content of the Quill editor using document.querySelector
-//       const htmlContent = document.querySelector(".ql-editor").innerHTML;
-  
-//       // Save the HTML content to Firestore
-//       await setDoc(docRef, { content: htmlContent });
-  
-//       console.log('Content saved successfully to Firestore!');
-//     } catch (error) {
-//       console.error('Error saving content:', error);
-//     }
-//   };
-  // const save = async () => {
-  //   // Trigger auto-save function to save the content
-  //   await autoSave();
-  // };
-  </script>
-  
+    
+   
+</template>
+    
 
 <style scoped>
+/* @author Lorena Horvat <github: Lorena-Hrvt> */
 
-html {
-  background-color: aliceblue;
-}
+    /* Scoped styles for the component */
+    html {
+      background-color: aliceblue;
+    }
 
-body {
-  background-color: aliceblue;
-}
+    body {
+      background-color: aliceblue;
+    }
 
 </style>
+
+
