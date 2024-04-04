@@ -49,7 +49,7 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
   .then ((result) => {
     console.log(result.user);
-    router.push("/");
+    router.push("/home");
   })
   .catch((error) => {
     //handle error
