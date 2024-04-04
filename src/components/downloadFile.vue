@@ -1,4 +1,5 @@
 <template>
+<!-- @author Lorena Horvat - Lorena-Hrvt -->
 
   <div class="btnContainer">
 
@@ -24,7 +25,7 @@
 
 <script setup>
 
-// imports -------------------------------------------------------------
+// imports --------------------------------------------------------------- @Lorena-Hrvt
 
 import { ref } from 'vue';
 import html2pdf from 'html2pdf.js';
@@ -32,10 +33,10 @@ import html2pdf from 'html2pdf.js';
 // css import
 import '../assets/style.css';
 
-// set ref for file name -------------------------------------------------
+// set ref for file name ------------------------------------------------- @Lorena-Hrvt
 const fileName = ref('');
 
-// download function -----------------------------------------------------
+// download function ----------------------------------------------------- @Lorena-Hrvt
 const downloadFile = () => {
 
   const fileNameValue = fileName.value;
@@ -45,7 +46,7 @@ const downloadFile = () => {
 
   // console.log(editorHTML);
 
-  // set pdf form options --------------------------------------------------
+  // set pdf form options ------------------------------------------------ @Lorena-Hrvt
   const pdfOptions = {
     margin: 15,
     font: { family: 'inherit' }, 
@@ -60,12 +61,12 @@ const downloadFile = () => {
     enableLinks: true
   };
 
-  // generate pdf and download ----------------------------------------------
+  // generate pdf and download ------------------------------------------- @Lorena-Hrvt
   html2pdf().from(editorHTML).set(pdfOptions).save();
 
 };
 
-// get semantic HTML representation of the content ---------------------------
+// get semantic HTML representation of the content ----------------------- @Lorena-Hrvt
 const getEditorHTML = () => {
   // quill instance
   // return htmlContent
