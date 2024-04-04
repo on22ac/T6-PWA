@@ -1,47 +1,10 @@
-<template>
-
-    <div class="navBar">
-        <img src="../assets/NotizenAppLogo.svg" alt="logo" class="logo">
-        <nav class="links">
-            <router-link to="/">Anmelden</router-link> |
-             <!-- <router-link to="/feed"> Feed </router-link> | -->
-            <router-link to="/register"> Registrieren </router-link>
-            <!-- <router-link to="/sign-in"> Login </router-link> | -->
-        </nav>
-
-    </div>
-
-    <div class="content">
-
-        <div class="userInfo">
-            <h1 align="center" class="loginInfo">Willkommen zurück!</h1>
-            <p align="center">Schön, dass du zurück bist. Hier kannst du dich wieder mit deinen Anmeldedaten anmelden.</p>
-        </div>
-
-        <div>
-            <img src="../assets/hello.svg" class="imgLogin">
-        </div>
-
-        <div>
-            <p><input class="loginInput" type="text" placeholder="Email" v-model="email" /></p>
-            <p><input class="loginInput" type="password" placeholder="Password" v-model="password" /></p>
-            <p v-if="errMsg">{{ errMsg }}</p>
-        </div>
-
-        <div class="btnContainer">
-            <p class="btns"><button @click="signIn">Einloggen</button></p>
-            <p class="btns"><button @click="signInWithGoogle">Sign In With Google</button></p>
-        </div>
-
-        <!-- <p><button @click="home">Home</button></p> -->
-
-    </div>
-
-</template>
-
 <script setup>
+/**
+ * @author Marie Bleickert <github: MaryScarBit>
+ */
+
 import { ref } from "vue";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from 'vue-router'
 
 // css import
@@ -52,9 +15,6 @@ const password = ref("");
 const errMsg = ref("");
 
 const router = useRouter()
-// const home = () => {
-//     router.push('/home')
-// }
 
 const signIn = () => {
     const auth = getAuth();
@@ -84,5 +44,53 @@ const signIn = () => {
         });
 };
 
-const signInWithGoogle = () => { };
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider)
+  .then ((result) => {
+    console.log(result.user);
+    router.push("/");
+  })
+  .catch((error) => {
+    //handle error
+  });
+};
 </script>
+
+<template>
+
+    <div class="navBar">
+        <img src="../assets/NotizenAppLogo.svg" alt="logo" class="logo">
+        <nav class="links">
+            <router-link to="/">Anmelden</router-link> |
+            <router-link to="/register"> Registrieren </router-link>
+        </nav>
+
+    </div>
+
+    <div class="content">
+
+        <div class="userInfo">
+            <h1 align="center" class="loginInfo">Willkommen zurück!</h1>
+            <p align="center">Schön, dass du zurück bist. Hier kannst du dich wieder mit deinen Anmeldedaten anmelden.</p>
+        </div>
+
+        <div>
+            <img src="../assets/hello.svg" class="imgLogin">
+        </div>
+
+        <div>
+            <p><input class="loginInput" type="text" placeholder="Email" v-model="email" /></p>
+            <p><input class="loginInput" type="password" placeholder="Password" v-model="password" /></p>
+            <p v-if="errMsg">{{ errMsg }}</p>
+        </div>
+
+        <div class="btnContainer">
+            <p class="btns"><button @click="signIn">Einloggen</button></p>
+            <p class="btns"><button @click="signInWithGoogle">Sign In With Google</button></p>
+        </div>
+
+    </div>
+
+</template>
+
