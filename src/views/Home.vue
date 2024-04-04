@@ -11,9 +11,13 @@
 <div class="btnContainer">
   <downloadFile />
     <Share/>
+    
 </div>
-    
-    
+
+<!-- These two buttons trigger the "Undo" and "Redo" functions respectively when clicked. -->
+    <button @click="undo">Undo</button>
+    <button @click="redo">Redo</button>
+
     <div class="wrapper">
       <QuillEditor
       class="editor"
@@ -27,6 +31,8 @@
 
     </div>
 
+
+
       <!-- <h1> {{ content }} </h1> -->
 
      <!-- <Save /> -->
@@ -37,6 +43,7 @@
   // css import
   import '../assets/style.css';
   import '../assets/toolbar.css';
+  
 
   import { useRouter } from 'vue-router'
 
@@ -54,12 +61,22 @@
   import { onValue, update, set } from 'firebase/database';
   import { debounce } from 'lodash-es';
 
+  // This imports the useRefHistory function from the "@vueuse/core" library.
+  import { useRefHistory } from "@vueuse/core";
+
   // import { db } from '../firebase/firebase.js'; // Import your Firebase configuration
   // import { doc, onSnapshot } from 'firebase/firestore'; // Import Firestore modularly
 
  
-
+// This defines a reactive reference named 'content' initialized with an empty string.
+// It also initializes two variables, 'undo' and 'redo', by destructuring the result of the useRefHistory function applied to the 'content'.
   const content = ref('');
+  const {
+    undo,
+    redo
+
+} = useRefHistory(content)
+
   const options = {
     debug: 'info',
     placeholder: 'Etwas hier schreiben...',
@@ -95,6 +112,7 @@ const autoSave = debounce(() => {
     console.error("Auto-Save Unsuccessful");
   });
 }, 1000);
+
 
 
 // onMounted(()=>{
