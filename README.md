@@ -29,5 +29,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Create and format text files
 - Share files
 - Download files as PDF
-- Offline usage
+- Synchronisation
  
