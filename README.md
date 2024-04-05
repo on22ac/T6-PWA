@@ -22,3 +22,12 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### App functions
+- Login/Register
+- Create and format text files
+- Share files
+- Download files as PDF
+- Offline usage
+ 
