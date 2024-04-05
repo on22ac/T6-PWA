@@ -30,4 +30,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - Share files
 - Download files as PDF
 - Synchronisation
+
+### Link to App: https://notizen-app-pwa-4afb6.web.app/
  
